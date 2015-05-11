@@ -1,1 +1,1 @@
-# hawai-mithai
+# Simple order management system
