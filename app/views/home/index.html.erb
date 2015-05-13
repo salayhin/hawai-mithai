@@ -1,18 +1,6 @@
 <!-- The justified navigation menu is meant for single line per list item.
           Multiple lines will require custom code not provided by Bootstrap. -->
-<div class="masthead">
-  <h3 class="text-muted">Hawai Mithai</h3>
-  <nav>
-    <ul class="nav nav-justified">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Downloads</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</div>
+<%= render partial: 'shared/header_menu' %>
 
 <!-- Jumbotron -->
 <div class="jumbotron">
@@ -30,7 +18,7 @@
         <p><%= to_bdt product.price if product.price.present? %></p>
         <% product_description = raw(product.description) %>
         <p><%= truncate(product_description, length: 150, separator: '..') if product.description.present? %></p>
-        <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        <p><a class="btn btn-success btn-xs" href="<%= product_path(product.id) %>">View details &raquo;</a></p>
       </div>
   <% end %>
 </div>

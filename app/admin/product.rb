@@ -26,7 +26,9 @@ ActiveAdmin.register Product do
   show do
     attributes_table do
       row :name
-      row :description
+      row 'Description' do |product|
+        product.description.gsub("\n", '<br/>').gsub("  ", '&nbsp;&nbsp;').html_safe
+      end
       row :price
       row :available_start_date
       row :available_end_date

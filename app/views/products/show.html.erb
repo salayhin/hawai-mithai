@@ -1,0 +1,67 @@
+<%= render partial: 'shared/header_menu' %>
+
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-lg-12">
+    <div class="col-lg-5">
+      <%= image_tag(@product.image.url(:main)) %>
+    </div>
+    <div class="col-lg-7">
+      <h2><%= @product.name if @product.name.present? %></h2>
+      <% product_description = @product.description.gsub("\n", '<br/>').gsub("  ", '&nbsp;&nbsp;').html_safe %>
+      <p><%= product_description if @product.description.present? %></p>
+        <hr>
+        <h3>Price - <%= to_bdt @product.price if @product.price.present? %></h3>
+        <p class="muted">Price is different for outside of Dhaka city</p>
+    </div>
+    </div>
+  </div>
+  <div class="row product-info">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab-1">Specification</a></li>
+        <li><a data-toggle="tab" href="#tab-2">Key Features</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="tab-1" class="tab-pane fade in active">
+          <table class="table table-striped">
+            <tbody>
+            <tr>
+              <th>Brand</th>
+              <td>Lenovo</td>
+            </tr>
+            <tr>
+              <th>OS</th>
+              <td>Windows 8</td>
+            </tr>
+            <tr>
+              <th>Processor</th>
+              <td>1.5 GHz Dual Core</td>
+            </tr>
+            <tr>
+              <th>Memory</th>
+              <td>2 GB RAM</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="tab-2" class="tab-pane fade">
+          <table class="table table-striped">
+            <tbody>
+            <tr>
+              <td>Windows 8 OS</td>
+            </tr>
+            <tr>
+              <td>Intel Dual Core Processor</td>
+            </tr>
+            <tr>
+              <td>18.5 Inch LED Screen</td>
+            </tr>
+            <tr>
+              <td>Integrated Graphics</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
