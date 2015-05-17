@@ -22,4 +22,14 @@ class ApplicationController < ActionController::Base
   def authenticate_admin_user!
     redirect_to root_path unless current_user.try(:is_admin?)
   end
+
+  def add_error_messages(object)
+    if object.present? && object.errors.present?
+      flash[:error] += '<ul>'
+      object.errors.full_messages.each do |message|
+        flash[:error] += "<li>#{message}</li>"
+      end
+      flash[:error] += '</ul>'
+    end
+  end
 end
