@@ -11,3 +11,15 @@
 [:super_admin, :member].each do |role|
   Role.create({ name: role })
 end
+
+category = Category.new
+category.name = 'Mango'
+category.save
+
+product = Product.new
+product.category_id = category.id
+product.name = 'First Name'
+product.description = 'Description'
+product.price = 'Price'
+product.is_published = true
+product.save
