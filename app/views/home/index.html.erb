@@ -1,25 +1,5 @@
-<!-- The justified navigation menu is meant for single line per list item.
-          Multiple lines will require custom code not provided by Bootstrap. -->
-
-<!-- Jumbotron -->
-<div class="jumbotron">
-  <h1>Check Order Status</h1>
-  <p class="lead">Enter your order number and click submit.</p>
-  <%= form_tag 'check_order_status' do %>
-      <div class="form-group">
-        <div class="col-sm-4">
-          <%= text_field_tag :order_no,'', {:class => 'col-sm-4 form-control',:placeholder => 'Order Number'} %>
-        </div>
-        <div class="col-sm-2">
-          <%= submit_tag 'Submit', :class => 'btn btn-success' %>
-        </div>
-      </div>
-  <% end %>
-
-</div>
-
 <!-- Example row of columns -->
-<div class="row">
+<div class="row" style="margin-top: 20px;">
   <% @products.each do |product| %>
       <div class="col-lg-4">
         <p><%= image_tag(product.image.url(:list)) %></p>
@@ -27,7 +7,7 @@
         <p><%= to_bdt product.price if product.price.present? %></p>
         <% product_description = raw(product.description) %>
         <p><%= truncate(product_description, length: 150, separator: '..') if product.description.present? %></p>
-        <p><a class="btn btn-success btn-xs" href="<%= product_path(product.id) %>">View details &raquo;</a></p>
+        <p><a class="btn btn-success btn-xs" href="<%= product_path(product.id) %>">Order Here &raquo;</a></p>
       </div>
   <% end %>
 </div>

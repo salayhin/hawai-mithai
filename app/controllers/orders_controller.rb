@@ -28,6 +28,10 @@ class OrdersController < ApplicationController
     @payment = Payment.new
   end
 
+  def order_status
+
+  end
+
   def check_order_status
     @order = Order.find_by_order_no(params[:order_no])
 

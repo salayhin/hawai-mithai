@@ -13,9 +13,13 @@ Rails.application.routes.draw do
   resources :products
   resources :orders
   resources :payments
+
+  get 'order_status' => 'orders#order_status', :as => 'order_status'
   post 'check_order_status' => 'orders#check_order_status', :as => 'check_order_status'
   get 'pay' => 'orders#pay', :as => 'pay'
   get 'receipt_image' => 'payments#receipt_image', :as => 'receipt_image'
+  get 'how_to_order' => 'pages#how_to_order', :as => 'how_to_order'
+  get 'contact' => 'pages#contact', :as => 'contact'
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
