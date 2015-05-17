@@ -1,0 +1,113 @@
+<div class="row" style="margin-top: 20px;">
+
+  <% if @order.present? %>
+      <div class="col-lg-12">
+        <div class="col-lg-5">
+          <%= image_tag(@order.product.image.url(:main)) %>
+        </div>
+        <div class="col-lg-7">
+          <h3>Product: <%= @order.product.name if @order.product.name.present? %></h3>
+          <p><strong>Order No: </strong><%= @order.order_no if @order.order_no.present? %></p>
+          <p><strong>Quantity: </strong><%= @order.quantity == Order::LARGE_QUANTITY ? Order::QUANTITY['Above'] : @order.quantity  %></p>
+          <p><strong>Status: </strong><%= @order.status == Order::STATUS[:new] ? Order::STATUS[:pending] : @order.status %></p>
+          <p><strong>Price: </strong><%= to_bdt @order.product.price if @order.product.price.present? %></p>
+          <p><strong>Full Name:</strong> <%= @order.full_name if @order.full_name.present?  %> </p>
+          <p><strong>Company:</strong> <%= @order.company if @order.company.present?  %> </p>
+          <p><strong>Address:</strong> <%= @order.address if @order.address.present?  %> </p>
+          <p><strong>Delivery Address:</strong> <%= @order.delivery_address if @order.delivery_address.present?  %> </p>
+          <p><strong>Phone:</strong> <%= @order.phone if @order.phone.present?  %> </p>
+          <p><strong>Mobile:</strong> <%= @order.mobile if @order.mobile.present?  %> </p>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<% unless @order.payments.present?%>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4 class="muted">payment info</h4>
+          <hr>
+          <%= form_for @payment, :html => {:multipart => true} do |f| %>
+              <%= f.hidden_field :order_id, :value => @order.id %>
+              <div class="form-group">
+
+                <div class="col-sm-6">
+                  <label for="exampleInputEmail1">Amount</label>
+                  <%= f.text_field :amount, :class => 'col-sm-6 form-control',:placeholder => 'Amount' %>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="exampleInputEmail1">Payment Option</label>
+                  <%= f.select :payment_type, options_for_select(Payment::PAYMENT_TYPE),{}, { :class => 'form-control' } %>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="exampleInputEmail1">Account Number</label>
+                  <%= f.text_field :account_number, :class => 'col-sm-6 form-control',:placeholder => 'Account Number' %>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="exampleInputEmail1">Paid Date</label>
+                  <%= f.text_field :payment_date, :class => 'col-sm-6 form-control',:placeholder => 'YYYY-MM-DD' %>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="exampleInputEmail1">Upload Receipt</label>
+                  <%= f.file_field :receipt_image, :class => 'col-sm-6 form-control' %>
+                </div>
+
+                <div class="col-sm-6">
+                  <br />
+                  <%= f.submit 'Submit', class: 'btn btn-success' %>
+                </div>
+
+              </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<div class="row" style="margin-top: 20px;">
+
+  <% if @order.payments.present? %>
+      <div class="col-lg-12">
+        <table class="table">
+          <caption>Payment Info</caption>
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Payment Via</th>
+            <th>Amount</th>
+            <th>Account Number</th>
+            <th>Payment Date</th>
+            <th>Status</th>
+            <th>Receipt image</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @order.payments.each_with_index do |payment, index| %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= payment.payment_type if payment.payment_type.present? %></td>
+                <td><%= payment.amount if payment.amount.present? %></td>
+                <td><%= payment.account_number if payment.account_number.present? %></td>
+                <td><%= payment.payment_date if payment.payment_date.present? %></td>
+                <td><%= payment.status if payment.status.present? %></td>
+                <td>
+                  <% if payment.receipt_image.present?   %>
+                      <%= image_tag(payment.receipt_image.url(:list)) %>
+                      <a href="/receipt_image?payment=<%= payment.id %>" target="_blank"><button type="button" class="btn btn-success btn-xs">View Large Image</button></a>
+                  <% else %>
+                      <%= '----' %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>

@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2015051604016656) do
     t.string   "receipt_image"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "status"
   end
 
   create_table "products", force: :cascade do |t|

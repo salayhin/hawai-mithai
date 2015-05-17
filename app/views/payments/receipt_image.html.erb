@@ -1,0 +1,8 @@
+<div class="row" style="margin-top: 20px;">
+
+  <% if @payment.present? %>
+      <div class="col-lg-12">
+          <%= image_tag(@payment.receipt_image.url) %>
+      </div>
+  <% end %>
+</div>

@@ -16,6 +16,8 @@ class Order < ActiveRecord::Base
       :confirmed => 'Confirmed'
   }
 
+  LARGE_QUANTITY = 500
+
   QUANTITY = {
       '10 Kg' => 10,
       '15 Kg' => 15,
@@ -24,10 +26,10 @@ class Order < ActiveRecord::Base
       '30 Kg' => 30,
       '35 Kg' => 35,
       '40 Kg' => 40,
-      'Above' => 500
+      'Above' => self::LARGE_QUANTITY
   }
 
-  LARGE_QUANTITY = 500
+
 
   ####<$ Scope List $>####
   scope :user_order_list, ->(user_id) { where('user_id =?', user_id)}

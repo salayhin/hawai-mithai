@@ -3,9 +3,19 @@
 
 <!-- Jumbotron -->
 <div class="jumbotron">
-  <h1>Marketing stuff!</h1>
-  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-  <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+  <h1>Check Order Status</h1>
+  <p class="lead">Enter your order number and click submit.</p>
+  <%= form_tag 'check_order_status' do %>
+      <div class="form-group">
+        <div class="col-sm-4">
+          <%= text_field_tag :order_no,'', {:class => 'col-sm-4 form-control',:placeholder => 'Order Number'} %>
+        </div>
+        <div class="col-sm-2">
+          <%= submit_tag 'Submit', :class => 'btn btn-success' %>
+        </div>
+      </div>
+  <% end %>
+
 </div>
 
 <!-- Example row of columns -->
